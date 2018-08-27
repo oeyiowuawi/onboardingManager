@@ -56,4 +56,16 @@ describe Authenticator do
       end
     end
   end
+
+  describe "#login" do
+    it "updates the employee status" do
+      employee = create(:employee, status: false)
+      authenticator = Authenticator.new(email: employee.email,
+                                            password: "invalid_password")
+
+      authenticator.login
+      
+      expect(employee.status).to be_truthy
+    end
+  end
 end
