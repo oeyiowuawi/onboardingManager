@@ -1,5 +1,5 @@
 
-require "rail_helper"
+require "rails_helper"
 
 describe Authenticator do
   describe "#valid" do
@@ -9,6 +9,28 @@ describe Authenticator do
                                           password: "1234ght")
 
         expect(authenticator).to_not be_valid
+      end
+    end
+  end
+
+  context "when employee exists" do
+    context "and email and password match" do
+      it "is valid" do
+        employee = create(:employee)
+        authenticator = Authenticator.new(email: employee.email,
+                                          password: employee.password)
+
+        expect(authenticator).to be_valid
+      end
+    end
+
+    context "and email and password does not match" do
+      it "is not valid" do
+        employee = create(:employee)
+        authenticator = Authenticator.new(email: employee.email,
+                                          password: "invalid_password")
+
+        expect(authenticator).not_to be_valid
       end
     end
   end
