@@ -9,4 +9,5 @@ class Task < ApplicationRecord
   )
 
   scope :not_notified, -> { where(notified: false) }
+  belongs_to :admin, class_name: "Employee", foreign_key: "created_by_id", optional: true
 end

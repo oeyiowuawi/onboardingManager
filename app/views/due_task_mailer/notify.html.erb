@@ -1,0 +1,18 @@
+<h1>Hi, <%= @admin.name.capitalize %></h1>
+
+<div>
+  <p>
+    This is to notify you that the Task you created for <@= employee.name %> on
+    <%= @task.created_at %> is past the due date <%= @task.due_date %>
+  </p>
+
+  <p>
+    <% if @task.done %>
+      The task was completed before the due date
+    <% else %>
+      The task is yet to be completed
+    <% end %>
+  </p>
+</div>
+<p>
+  
