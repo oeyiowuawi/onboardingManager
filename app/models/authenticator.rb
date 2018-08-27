@@ -19,12 +19,16 @@ class Authenticator
     AuthToken.encode(employee_id: employee.id)
   end
 
+  def login
+    employee.update(status: true)
+  end
+
   private
 
   attr_reader :email, :password
 
   def employee
-    Employee.find_by(email: email)
+    @employee ||= Employee.find_by(email: email)
   end
 
 end

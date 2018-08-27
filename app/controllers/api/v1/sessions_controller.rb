@@ -1,10 +1,11 @@
 class Api::V1::SessionsController < ApplicationController
 
   def create
-    autenticator = Authenticator.new(sessions_params)
-    if autenticator.valid?
+    authenticator = Authenticator.new(email: sessions_params[:email],
+                                     password: sessions_params[:password])
+    if authenticator.valid?
       authenticator.login
-      render json: { auth_token: autenticator.auth_token }, status: 200
+      render json: { auth_token: authenticator.auth_token }, status: 200
     else
       render json: { error: "Bad email or password. Try again"}, status: 401
     end

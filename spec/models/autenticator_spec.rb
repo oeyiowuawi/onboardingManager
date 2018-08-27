@@ -62,10 +62,11 @@ describe Authenticator do
       employee = create(:employee, status: false)
       authenticator = Authenticator.new(email: employee.email,
                                             password: "invalid_password")
+      allow(Employee).to receive(:find_by).and_return(employee)
 
       authenticator.login
       
-      expect(employee.status).to be_truthy
+      expect(employee.reload.status).to be_truthy
     end
   end
 end
