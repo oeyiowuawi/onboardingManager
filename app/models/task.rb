@@ -7,4 +7,6 @@ class Task < ApplicationRecord
     :created_by_id,
     presence: true
   )
+
+  scope :not_notified, -> { where(notified: false) }
 end
