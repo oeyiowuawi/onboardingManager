@@ -3,6 +3,7 @@ class Employee < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 2 }
   validates :password, presence: true, length: { minimum: 7 }
+  validates :department_id, presence: true
   validates(
     :email,
     presence: true,
@@ -11,4 +12,6 @@ class Employee < ApplicationRecord
   )
 
   has_secure_password
+
+  belongs_to :department
 end

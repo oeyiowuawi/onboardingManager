@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "/login", to: "sessions#create"
       get "/logout", to: "sessions#destroy"
+
+      namespace :admin do
+        resources :employees, only: [:create]
+      end
     end
   end
 end

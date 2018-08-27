@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
 
-  # before_action :authenticate, only: [:destroy]
+  before_action :authenticate, only: [:destroy]
 
   def create
     authenticator = Authenticator.new(email: sessions_params[:email],

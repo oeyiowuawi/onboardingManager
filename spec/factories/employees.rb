@@ -4,5 +4,6 @@ FactoryBot.define do
     email "employee@andela.com"
     start_date Date.current
     password "abc1234567"
+    department
   end
 end
