@@ -9,5 +9,11 @@ describe AuthToken do
 
       expect(JWT).to have_received(:encode)
     end
+
+    it "returns a string" do
+      token = AuthToken.encode(user_id: 1)
+
+      expect(token).to be_a(String)
+    end
   end
 end
