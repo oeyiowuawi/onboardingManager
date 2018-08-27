@@ -19,7 +19,7 @@ describe "Send Notifications to admin for past due tasks" do
     create(:task, employee: employee, created_by_id: admin_employee.id,
                   description: "This should have been completed", done: true,
                   due_date: Date.current - 1.day)
-
+binding.pry
     rake_task = Rake::Task["onboardingManager:tasks:notify_admin_for_past_due_tasks"]
 
     expect do
