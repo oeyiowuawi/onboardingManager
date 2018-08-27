@@ -34,4 +34,15 @@ describe Authenticator do
       end
     end
   end
+
+  describe "#auth_token" do
+    context "when the authenticator is not valid" do
+      it "returns nil" do
+        authenticator = Authenticator.new(email: "test@email.com",
+                                          password: "invalid_password")
+
+        expect(authenticator.auth_token).to be_nil
+      end
+    end
+  end
 end
