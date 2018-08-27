@@ -2,13 +2,15 @@ class ApplicationController < ActionController::Base
   rescue_from AutenticationError, with: :expired_token
   rescue_from InvalidTokenError, with: :invalid_token
 
+  attr_reader :current_employee
+
   protected
 
   def authenticate
     employee_id = decoded_auth_token[:employee_id]
     employee = Employee.find(employee_id)
     raise AutenticationError unless employee.status
-    @current_user = employee
+    @current_employee = employee
   end
 
   def expired_token

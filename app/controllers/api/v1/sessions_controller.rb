@@ -14,8 +14,8 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def destroy
-    authenticator = Authenticator.new(email: sessions_params[:email],
-                                     password: sessions_params[:password])
+    authenticator = Authenticator.new(email: current_employee.email,
+                                     password: current_employee.password)
     authenticator.logout
 
     render json: { message: "Successfully Logged out"}, status: 200

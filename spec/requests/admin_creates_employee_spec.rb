@@ -11,13 +11,15 @@ describe "Admin Creates an Employee" do
         "/api/v1/admin/employees",
         params: { email: "new_employee@andela.com",
                   password: "I am new here",
-                  name: "New Employee"
+                  name: "New Employee",
                   department_id: employee.department.id
         }.to_json,
         headers: { "Content-Type" => "application/json",
                    "AUTHORIZATION" => token
         }
       )
+
+      expect(response.status).to eq(201)
     end
   end
 end
