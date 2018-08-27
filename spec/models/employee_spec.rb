@@ -11,5 +11,6 @@ describe Employee do
     it { is_expected.to validate_length_of(:password).is_at_least(7) }
     it { is_expected.to have_secure_password }
     it { is_expected.to belong_to(:department)}
+    it { is_expected.to have_many(:tasks)}
   end
 end

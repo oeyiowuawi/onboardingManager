@@ -9,6 +9,8 @@ Rails.application.routes.draw do
         resources :employees, only: [:create]
         resources :tasks, only: [:create]
       end
+
+      resources :tasks, only: [:update]
     end
   end
 end
