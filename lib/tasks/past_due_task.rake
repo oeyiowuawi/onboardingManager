@@ -6,7 +6,7 @@ namespace :onboardingManager do
       due_tasks = Task.where("due_date < ?", Date.current).not_notified
       puts due_tasks.count
       due_tasks.each do |due_task|
-        notifier = DueTaskNotifier.factory(due_task)
+        notifier = DueTaskNotifier.factory(task: due_task, strategy: :email)
         notifier.notify
       end
       puts "Notified admins for #{due_tasks.count} past due task"
