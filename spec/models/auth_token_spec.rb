@@ -27,5 +27,25 @@ describe AuthToken do
         expect(result).to eq( { "user_id" => 1 })
       end
     end
+
+    context "when the token is not valid" do
+      context "and it is expired" do
+        it "raises an authentication error" do
+          token = AuthToken.encode(user_id: 1, exp: (Time.now - 3600).to_i)
+
+          expect do
+            AuthToken.decode(token)
+          end.to raise_error(AutenticationError)
+        end
+      end
+
+      context "and token is invalid" do
+        it "raises invalid token error" do
+          expect do
+            AuthToken.decode("invalid.token")
+          end.to raise_error(InvalidTokenError)
+        end
+      end
+    end
   end
 end
