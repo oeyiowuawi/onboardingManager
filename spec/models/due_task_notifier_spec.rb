@@ -23,5 +23,17 @@ describe DueTaskNotifier do
 
       expect(strategy).to have_received(:notify)
     end
+
+    it "marks the task as notified" do
+      task = create(:task, notified: false)
+      strategy = EmailNotifierStrategy.new
+      allow(EmailNotifierStrategy).to receive(:new).and_return(strategy)
+      allow(strategy).to receive(:notify)
+
+      notifier = DueTaskNotifier.factory(task: task, strategy: :email)
+      notifier.notify
+
+      expect(task.notified).to be_truthy
+    end
   end
 end

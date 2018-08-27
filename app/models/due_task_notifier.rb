@@ -10,6 +10,7 @@ class DueTaskNotifier
 
   def notify
     strategy.notify(task)
+    task.update(notified: true)
   end
 
   def self.factory(strategy:, task:)
