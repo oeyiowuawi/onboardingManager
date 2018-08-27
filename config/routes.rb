@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       namespace :admin do
         resources :employees, only: [:create]
+        resources :tasks, only: [:create]
       end
     end
   end

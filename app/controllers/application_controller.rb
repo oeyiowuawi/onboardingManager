@@ -32,4 +32,10 @@ class ApplicationController < ActionController::Base
                          end
   end
 
+  def require_admin
+    unless Admin.exists?(employee_id: current_employee.id)
+      render json: { error: "Unauthorized to perform this action" }, status: 403
+    end
+  end
+
 end

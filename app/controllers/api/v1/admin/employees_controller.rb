@@ -14,12 +14,6 @@ class Api::V1::Admin::EmployeesController < ApplicationController
 
   private
 
-  def require_admin
-    unless Admin.exists?(employee_id: current_employee.id)
-      render json: { error: "Unauthorized to perform this action" }, status: 403
-    end
-  end
-
   def employee_params
     params.permit(:email, :department_id, :name, :password)
   end
