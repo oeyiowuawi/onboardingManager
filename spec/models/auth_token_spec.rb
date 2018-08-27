@@ -5,7 +5,7 @@ describe AuthToken do
     it "calls JWT encode method" do
       allow(JWT).to receive(:encode).and_call_original
 
-      AuthToken.encode
+      AuthToken.encode(user_id: 1)
 
       expect(JWT).to have_received(:encode)
     end
