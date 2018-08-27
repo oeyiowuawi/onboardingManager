@@ -3,8 +3,8 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
     create_table :employees do |t|
       t.string :name
       t.string :email
-      t.string :string
-      t.string :start_date
+      t.boolean :status, null: false, default: false
+      t.date :start_date
 
       t.timestamps
     end

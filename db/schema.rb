@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2018_08_27_114802) do
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "string"
-    t.string "start_date"
+    t.boolean "status", default: false, null: false
+    t.date "start_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest", null: false
