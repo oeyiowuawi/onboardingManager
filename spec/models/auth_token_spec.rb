@@ -20,11 +20,11 @@ describe AuthToken do
   describe ".decode" do
     context "when the token is valid" do
       it "returns an hash representing the encoded payload" do
-        token = AuthToken.encode(user_id: 1, exp: 5.minutes.from_now)
+        token = AuthToken.encode(user_id: 1, exp: (Time.now + 3600).to_i)
 
         result = AuthToken.decode(token)
 
-        expect(result).to eq( { user_id: 1 })
+        expect(result).to eq( { "user_id" => 1 })
       end
     end
   end
