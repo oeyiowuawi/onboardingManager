@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe AuthToken do
-  describe "#encode" do
+  describe ".encode" do
     it "calls JWT encode method" do
       allow(JWT).to receive(:encode).and_call_original
 
@@ -14,6 +14,18 @@ describe AuthToken do
       token = AuthToken.encode(user_id: 1)
 
       expect(token).to be_a(String)
+    end
+  end
+
+  describe ".decode" do
+    context "when the token is valid" do
+      it "returns an hash representing the encoded payload" do
+        token = AuthToken.encode(user_id: 1, exp: 5.minutes.from_now)
+
+        result = AuthToken.decode(token)
+
+        expect(result).to eq( { user_id: 1 })
+      end
     end
   end
 end
