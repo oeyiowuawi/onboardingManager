@@ -44,5 +44,16 @@ describe Authenticator do
         expect(authenticator.auth_token).to be_nil
       end
     end
+
+    context "when the authenticator is valid" do
+      it "returns a token" do
+        employee = create(:employee)
+        authenticator = Authenticator.new(email: employee.email,
+                                            password: employee.password)
+        authenticator.valid?
+
+        expect(authenticator.auth_token).to be_truthy
+      end
+    end
   end
 end

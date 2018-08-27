@@ -2,15 +2,21 @@ class Authenticator
   def initialize(email:, password:)
     @email = email
     @password = password
+    @valid = false
   end
 
   def valid?
     return false unless employee.present?
     if employee.authenticate(password)
-      true
+      @valid = true
     else
-      false
+      @valid = false
     end
+  end
+
+  def auth_token
+    return if @valid == false
+    AuthToken.encode(employee_id: employee.id)
   end
 
   private
