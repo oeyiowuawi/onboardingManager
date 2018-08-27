@@ -30,4 +30,21 @@ describe "Session management", type: :request do
     end
   end
 
+  describe "logging out" do
+    it "returns a log out message" do
+      employee = create(:employee)
+      token = AuthToken.encode(employee_id: employee.id,
+                               exp: (Time.now + 3600).to_i)
+
+      get(
+        "/api/v1/logout",
+        params: {}.to_json,
+        headers: { "Content-Type" => "application/json",
+                    "AUTHORIZATION" => token }
+      )
+
+      body = JSON.parse(response.body)
+      expect(body["message"]).to eq("Successfully Logged out")
+    end
+  end
 end
