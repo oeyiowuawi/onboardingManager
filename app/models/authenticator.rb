@@ -23,6 +23,10 @@ class Authenticator
     employee.update(status: true)
   end
 
+  def logout
+    employee.update(status: false)
+  end
+
   private
 
   attr_reader :email, :password

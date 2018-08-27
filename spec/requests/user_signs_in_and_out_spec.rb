@@ -32,7 +32,7 @@ describe "Session management", type: :request do
 
   describe "logging out" do
     it "returns a log out message" do
-      employee = create(:employee)
+      employee = create(:employee, status: true)
       token = AuthToken.encode(employee_id: employee.id,
                                exp: (Time.now + 3600).to_i)
 

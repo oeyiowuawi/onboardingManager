@@ -69,4 +69,17 @@ describe Authenticator do
       expect(employee.reload.status).to be_truthy
     end
   end
+
+  describe "#logout" do
+    it "updates the user status to false" do
+       employee = create(:employee, status: true)
+      authenticator = Authenticator.new(email: employee.email,
+                                            password: "invalid_password")
+      allow(Employee).to receive(:find_by).and_return(employee)
+
+      authenticator.logout
+      
+      expect(employee.reload.status).to be_falsey
+    end
+  end
 end

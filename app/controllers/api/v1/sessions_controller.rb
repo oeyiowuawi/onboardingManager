@@ -1,5 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
 
+  # before_action :authenticate, only: [:destroy]
+
   def create
     authenticator = Authenticator.new(email: sessions_params[:email],
                                      password: sessions_params[:password])
@@ -9,6 +11,14 @@ class Api::V1::SessionsController < ApplicationController
     else
       render json: { error: "Bad email or password. Try again"}, status: 401
     end
+  end
+
+  def destroy
+    authenticator = Authenticator.new(email: sessions_params[:email],
+                                     password: sessions_params[:password])
+    authenticator.logout
+
+    render json: { message: "Successfully Logged out"}, status: 200
   end
 
   private
